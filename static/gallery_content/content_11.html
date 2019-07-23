@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>ტენტ სისტემები: კაპოტინა </title>
+	<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	<link href='css/light_gallery.css' rel='stylesheet' type='text/css'>
+	<link href='css/style.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="container">
+		<h1 class="align-center">კაპოტინა</h1>
+		<div class="gallery">
+			<a href="img/img11/img_1.jpg"><img class="img-thumbnail" src="img/img11/img_1.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა" /></a>
+
+			<a href="img/img11/img_2.jpg"><img class="img-thumbnail" src="img/img11/img_2.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_3.jpg"><img class="img-thumbnail" src="img/img11/img_3.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_4.jpg"><img class="img-thumbnail" src="img/img11/img_4.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინაა"/></a>
+
+
+			<div class="clear"></div>
+
+			<a href="img/img11/img_5.jpg"><img class="img-thumbnail" src="img/img11/img_5.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_6.jpg"><img class="img-thumbnail" src="img/img11/img_6.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_7.jpg"><img class="img-thumbnail" src="img/img11/img_7.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_8.jpg"><img class="img-thumbnail" src="img/img11/img_8.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<div class="clear"></div>
+
+			<a href="img/img11/img_9.jpg"><img class="img-thumbnail" src="img/img11/img_9.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა" /></a>
+
+			<a href="img/img11/img_10.jpg"><img class="img-thumbnail" src="img/img11/img_10.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_11.jpg"><img class="img-thumbnail" src="img/img11/img_11.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+
+			<a href="img/img11/img_12.jpg"><img class="img-thumbnail" src="img/img11/img_12.jpg" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="კაპოტინა"/></a>
+			
+			<div class="clear"></div>
+
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="js/gallery_js.js"></script>
+<script>
+	$(function(){
+		var $gallery = $('.gallery a').simpleLightbox();
+
+		$gallery.on('show.simplelightbox', function(){
+			console.log('Requested for showing');
+		})
+		.on('shown.simplelightbox', function(){
+			console.log('Shown');
+		})
+		.on('close.simplelightbox', function(){
+			console.log('Requested for closing');
+		})
+		.on('closed.simplelightbox', function(){
+			console.log('Closed');
+		})
+		.on('change.simplelightbox', function(){
+			console.log('Requested for change');
+		})
+		.on('next.simplelightbox', function(){
+			console.log('Requested for next');
+		})
+		.on('prev.simplelightbox', function(){
+			console.log('Requested for prev');
+		})
+		.on('nextImageLoaded.simplelightbox', function(){
+			console.log('Next image loaded');
+		})
+		.on('prevImageLoaded.simplelightbox', function(){
+			console.log('Prev image loaded');
+		})
+		.on('changed.simplelightbox', function(){
+			console.log('Image changed');
+		})
+		.on('nextDone.simplelightbox', function(){
+			console.log('Image changed to next');
+		})
+		.on('prevDone.simplelightbox', function(){
+			console.log('Image changed to prev');
+		})
+		.on('error.simplelightbox', function(e){
+			console.log('No image found, go to the next/prev');
+			console.log(e);
+		});
+	});
+</script>
+</body>
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p style="text-align: center;">&copy; Tent Systems Ltd. All Rights Reserved.</p>
+          <div class="credits">
+          </div>
+        </div>
+      </div>
+    </footer>
+</html>

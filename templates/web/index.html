@@ -1,0 +1,252 @@
+{% extends '../base.html' %}
+{% load static %}
+{% block content %}
+  <section id="service" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h2 class="service-title pad-bt15">ჩვენი გამოცდილება ტენტ სისტემების
+
+                                       <br> სფეროში თქვენთვის გამოსავალია</h2>
+                  <p class="sub-title pad-bt15">კომპანია ტენტ სისტემები გთავაზობთ თქვენი
+                      <br>ყველანაირი ჩანაფიქრების ასრულებას.</p>
+                  <hr class="bottom-line">
+              </div>
+              <div class="col-md-12 col-sm-6 col-xs-12">
+                  <div class="font-weight-bold">
+                      <p>ჩვენ ვართ კომპანია, რომელსაც დიდი გამოცდილება აქვს დაჩრდილვის სფეროში და გააჩნია სისტემების დიდი არჩევანი. ჩვენ ვმუშაობთ საცხოვრებელი და ბიზნეს შენობებში,სპეციალურ ნაგებობებში. დაჩრდილვის სისტემები შეუძლია მოერგოს ნებისმიერი ზომის და ნებისმიერი სიძნელის მიუხედავად,ნებისმიერ ფართს. ჩვენი სისტემები ხელს შეგიწყობთ შეამციროთ თქვენი ხარჯები, ზამთარში გათბობის და ზაფხულში გაგრილების.
+                          <a onclick="javascript:ShowHide('HiddenDiv')">მეტის ჩვენება</a>
+                      </p>
+                      <div class="mid" id="HiddenDiv" style="display: none;"><font align="right"></font> .თუმცა, დაჩრდილვის სისტემები განსხვავდება და აუცილებელია ნებისმიერი სახლში, განსაკუთრებით საქართველოში, სადაც ამინდი შეიძლება იყოს ძალიან ცვალებადი, ჩვენი სისტემები ასევე უძლებს ძლიერ ქარსაც, შეგიძლიათ გამოიყენოთ აივნებზე ან ტერასებზე, გახსნილ სფეროებში, როგორიცაა ბაღში ან ეზოში ან სხვა შენობაში.ჩვენი სისტემები ძალიან ეფექტური დაჩრდილვის სისტემებია. ჩვენი სისტემები გამოირჩევა სხვა კომპანიების სისტემებიდან, მაღალი ხარისხის მასალებით, მექანიზმებით, ელექტრო ძრავებით და 100% წყალ გაუმტარი ქსოვილებით. ჩვენი მასალები ჩამოდის საბერძნეთიდან და არის უმღლესი ხარისხის,არავითარი ჩინური და თურქული. ჩვენი კომპანია უზრუნველყოფს ხარისხს,თანამედროვე დიზაინს და უნიკალური ესთეტიკის ტენტ სისტემებს. ჩვენი მიზანია ჩვენი კლიენტი კმაყოფილი და მადლობელი დარჩეს ჩვენი მომსახურებით. დაგვიკავშირდით , ჩვენ შევისწავლით და ერთად განვიხილოთ თუ რა სტილის და გამძლეობის სისტემა შეესაბამება თქვენს სივრცეს.
+                      </div>
+                      <script type="text/javascript">
+                          function ShowHide(divId) {
+                              if (document.getElementById(divId).style.display == 'none') {
+                                  document.getElementById(divId).style.display = 'block';
+                              } else {
+                                  document.getElementById(divId).style.display = 'none';
+                              }
+                          }
+                          // ]]>
+                      </script>
+
+  </section>
+  <!---->
+  <!---->
+  <!---->
+  <!---->
+  <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h2 class="service-title pad-bt15">ჩვენი პროდუქცია</h2>
+                  <hr class="bottom-line">
+              </div>
+              {% for gallery in gallery_list %}
+                    <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">
+                        <figure>
+                            <img src="{{ gallery.gallery_image.url }}" class="img-responsive">
+                            <a href="/gallery/{{gallery.id}}" target="_blank">
+                                <figcaption>
+                                    <h2>{{ gallery.gallery_title }}</h2>
+                                </figcaption>
+                            </a>
+                        </figure>
+                    </div>
+              {% endfor %}
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_1.jpg.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_1.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>პერგოლა ნათურებით</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_2.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_2.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>პერგოლა</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_3.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_3.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ადერიდა</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15" target="_blank">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_4.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_4.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ადერიდა კოლონებით</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_5.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_5.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ორმაგი გაშლით</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_6.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_6.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>გამჭირვალე ტენტი(ჟელატინი)</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_7.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_7.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი მუხლებით</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_8.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_8.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ვერტიკალური (რიდო)</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_9.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_9.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ბრაცებით</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_10.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_10.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>ტენტი ფიქსირებული</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_11.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_11.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>კაპოტინა</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+<!--              <div class="col-md-4 col-sm-6 col-xs-12 portfolio-item padding-right-zero mr-btn-15">-->
+<!--                  <figure>-->
+<!--                      <img src="{% static 'img/product_12.png' %}" class="img-responsive">-->
+<!--                      <a href="{% static 'gallery_content/content_12.html' %}" target="_blank">-->
+<!--                          <figcaption>-->
+<!--                              <h2>როლო ფარდა (როლერი)</h2>-->
+<!--                          </figcaption>-->
+<!--                      </a>-->
+<!--                  </figure>-->
+<!--              </div>-->
+          </div>
+      </div>
+  </section>
+  <!---->
+  <!---->
+
+  <section id="testimonial" class="wow fadeInUp delay-05s">
+      <div class="bg-testicolor">
+          <div class="container section-padding">
+
+          </div>
+      </div>
+  </section>
+  <!---->
+  <section id="blog" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <h2 class="service-title pad-bt15">ჩვენი ნამუშევრები</h2>
+                  <hr class="bottom-line">
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="blog-sec">
+                      <div class="blog-img">
+                          <a href="">
+                              <img src="{% static 'img/01.jpg' %}" class="img-responsive">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="blog-sec">
+                      <div class="blog-img">
+                          <a href="">
+                              <img src="{% static 'img/02.jpg' %}" class="img-responsive">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+              <div class="col-md-4 col-sm-6 col-xs-12">
+                  <div class="blog-sec">
+                      <div class="blog-img">
+                          <a href="">
+                              <img src="{% static 'img/03.jpg' %}" class="img-responsive">
+                          </a>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+  </section>
+  <!---->
+  <section id="contact" class="section-padding wow fadeInUp delay-05s">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12 text-center white">
+                  <h2 class="service-title pad-bt15">დაგვიკავშირდით</h2>
+                  <hr class="bottom-line white-bg">
+              </div>
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                  <div class="loction-info white">
+                      <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>დიდი დიღომი, მეფე მირიანის ქ. 38.</p>
+                      <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>tenti1971@gmail.com</p>
+                      <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>+995 591 66 50 50</p>
+                  </div>
+              </div>
+              <div class="mapouter">
+                  <div class="gmap_canvas"><iframe width="510" height="393" id="gmap_canvas" src="https://maps.google.com/maps?q=%E1%83%93%E1%83%98%E1%83%93%E1%83%98%20%E1%83%93%E1%83%98%E1%83%A6%E1%83%9D%E1%83%9B%E1%83%98%2C%20%E1%83%9B%E1%83%94%E1%83%A4%E1%83%94%20%E1%83%9B%E1%83%98%E1%83%A0%E1%83%98%E1%83%90%E1%83%9C%E1%83%98%E1%83%A1%20%E1%83%A5.%2038&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe><a href="https://www.embedgooglemap.org">embed google map control zoom</a>
+                  </div>
+                  <style>.mapouter{position:relative;text-align:right;height:393px;width:510px;}.gmap_canvas {overflow:hidden;background:none!important;height:393px;width:510px;}</style>
+              </div>
+          </div>
+      </div>
+  </section>
+{% endblock content %}

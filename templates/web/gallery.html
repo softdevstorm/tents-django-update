@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>ტენტ სისტემები: გალერია</title>
+	<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+    <link href="{% static 'simplelightbox-master/dist/simplelightbox.min.css' %}" rel='stylesheet' type='text/css'>
+	<link href="{% static 'simplelightbox-master/demo/demo.css' %}" rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="container">
+        <meta id="logged_in_user" data-auth="{{request.user.is_superuser}}">
+		<h1 class="align-center">გალერია</h1>
+		<div class="gallery">
+            {% for gallery in gallery_list %}
+                {% if gallery %}
+                    <div class="gallery-photo">
+                        <a href="{{gallery.gallery.gallery_image.url}}" data-type="gallery" data-id="{{gallery.gallery.id}}" class="big"><img class="img-thumbnail" src="{{gallery.gallery.gallery_image.url}}" alt="" title="{{gallery.gallery.gallery_title}}" /></a>
+                        {% for photo in gallery.photos %}
+                        <a href="{{photo.photo.url}}" data-type="photo" data-id="{{photo.id}}"><img class="img-thumbnail" src="{{photo.photo.url}}" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="{{photo.name}}"/></a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'simplelightbox-master/dist/simple-lightbox.js' %}"></script>
+<script>
+	$(function(){
+	    var data = new FormData();
+	    var selectedPhotoId = null;
+	    var selectedType = null;
+		var $gallery = $('.gallery a');
+		if ($gallery.length > 0) {
+		    $gallery = $gallery.simpleLightbox();
+        }
+
+		$gallery.on('show.simplelightbox', function(){
+			console.log('Requested for showing');
+			selectedPhotoId = $(this).attr('data-id');
+			selectedType = $(this).attr('data-type');
+		})
+		.on('shown.simplelightbox', function(){
+			console.log('Shown');
+		})
+		.on('close.simplelightbox', function(){
+			console.log('Requested for closing');
+		})
+		.on('closed.simplelightbox', function(){
+			console.log('Closed');
+		})
+		.on('change.simplelightbox', function(){
+			console.log('Requested for change');
+		})
+		.on('next.simplelightbox', function(){
+			console.log('Requested for next');
+		})
+		.on('prev.simplelightbox', function(){
+			console.log('Requested for prev');
+		})
+		.on('nextImageLoaded.simplelightbox', function(){
+			console.log('Next image loaded');
+		})
+		.on('prevImageLoaded.simplelightbox', function(){
+			console.log('Prev image loaded');
+		})
+		.on('changed.simplelightbox', function(){
+			console.log('Image changed');
+		})
+		.on('nextDone.simplelightbox', function(){
+			console.log('Image changed to next');
+		})
+		.on('prevDone.simplelightbox', function(){
+			console.log('Image changed to prev');
+		})
+		.on('error.simplelightbox', function(e){
+			console.log('No image found, go to the next/prev');
+			console.log(e);
+		});
+
+		var ids = [];
+
+        for( var i = 0; i < $('.gallery a').length; i ++){
+            var item = {};
+            item['id'] = $('.gallery a').eq(i).attr('data-id');
+            item['type'] = $('.gallery a').eq(i).attr('data-type');
+            ids.push(item)
+
+        }
+
+		$('.gallery a').click(function(){
+		    var loggedin = $('#logged_in_user').data().auth;
+		    if (loggedin == "True") {
+                $('.sl-image').append('<form method="post">{% csrf_token %}' +
+                    '<input type="file" class="upload-image" name="pic" accept="image/*" style="display: none;">' +
+                    '</form>');
+                $('.sl-image').append('<button class="change-photo">Change</button>');
+                $('.sl-image').append('<button class="delete-photo">Delete</button>');
+            }
+
+            $('.change-photo').click(function() {
+                var image = null;
+                $('.upload-image').click();
+                $('.upload-image').change(function(e) {
+                    image = e.target.files[0];
+                    var currentphotoid = null;
+                    var changetype = null;
+                    var viewId = parseInt($('.sl-current').text());
+                    if (viewId) {
+                        currentphotoid  = ids[viewId - 1]['id'];
+                        changetype = ids[viewId - 1]['type'];
+                    } else {
+                        currentphotoid = parseInt(selectedPhotoId);
+                        changetype = selectedType;
+                    }
+
+                    data.append('image', image);
+                    data.append('photo_id', currentphotoid);
+                    data.append('type', changetype);
+
+                    var token = '{{csrf_token}}';
+
+                    if (changetype == "photo") {
+                        $.ajax({
+                            headers: { "X-CSRFToken": token },
+                            url: '/change-photo',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            type: 'POST',
+                            success: function(response) {
+                                console.log(response);
+                                if ( response == 'success' ) {
+                                    location.reload();
+                                }
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            }
+                        });
+                    } else {
+                        $.ajax({
+                            headers: { "X-CSRFToken": token },
+                            url: '/update-gallery',
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            type: 'POST',
+                            success: function(response) {
+                                console.log(response);
+                                if ( response == 'success' ) {
+                                    location.reload();
+                                }
+                            },
+                            error: function(error) {
+                                console.log(error);
+                            }
+                        });
+                    }
+                });
+            });
+
+            $('.delete-photo').click(function() {
+                var currentphotoid = null;
+                var changetype = null;
+                var viewId = parseInt($('.sl-current').text());
+                if (viewId) {
+                    currentphotoid  = ids[viewId - 1]['id'];
+                    changetype = ids[viewId - 1]['type'];
+                } else {
+                    currentphotoid = parseInt(selectedPhotoId);
+                    changetype = selectedType;
+                }
+
+                var token = '{{csrf_token}}';
+
+                if (changetype == "photo") {
+
+                    data.append('photo_id', currentphotoid);
+
+                    $.ajax({
+                        headers: { "X-CSRFToken": token },
+                        url: '/delete-photo',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        type: 'POST',
+                        success: function(response) {
+                            console.log(response);
+                            if ( response == 'success' ) {
+                                location.reload();
+                            }
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                } else {
+                    alert("can't delete gallery");
+                }
+            });
+
+        });
+	});
+</script>
+</body>
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p style="text-align: center;">&copy; Tent Systems Ltd. All Rights Reserved.</p>
+          <div class="credits">
+          </div>
+        </div>
+      </div>
+    </footer>
+</html>

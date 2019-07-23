@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ტენტები</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:400,300|Raleway:300,400,900,700italic,700,300,600">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/jquery.bxslider.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/font-awesome.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <meta property="og:url" content="https://www.your-domain.com/your-page.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Your Website Title" />
+    <meta property="og:description" content="Your description" />
+    <meta property="og:image" content="https://www.your-domain.com/path/image.jpg" />
+
+</head>
+
+<body>
+    <div class="loader"></div>
+    <div id="myDiv">
+        <!--HEADER-->
+        <div class="header">
+            <div class="bg-color">
+                <header id="main-header">
+                    <nav class="navbar navbar-default navbar-fixed-top">
+                        <div class="container">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <img src="{% static 'img/tents_logo.png' %}" width="120px" alt="ტენტ სისტემები">
+                            </div>
+                            <div class="collapse navbar-collapse" id="myNavbar">
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li class="active"><a href="#main-header">მთავარი</a></li>
+                                    <li class=""><a href="#service">სერვისი</a></li>
+                                    <li class=""><a href="#portfolio">ჩვენი პროდუქტი</a></li>
+<!--                                    <li class=""><a href="{% static 'simplelightbox-master/demo/index.html' %}" target="_blank">გალერია</a></li>-->
+                                    <li class=""><a href="/gallery" target="_blank">გალერია</a></li>
+                                    <li class=""><a href="#blog">ჩვენი ნამუშევრები</a></li>
+                                    <li class=""><a href="#contact">კონტაქტი</a></li>
+                                </ul>
+                                <!-- Load Facebook SDK for JavaScript -->
+                                <div id="fb-root"></div>
+                                <script>
+                                    (function(d, s, id) {
+                                        var js, fjs = d.getElementsByTagName(s)[0];
+                                        if (d.getElementById(id)) return;
+                                        js = d.createElement(s);
+                                        js.id = id;
+                                        js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+                                        fjs.parentNode.insertBefore(js, fjs);
+                                    }(document, 'script', 'facebook-jssdk'));
+                                </script>
+
+                                <!-- Your share button code -->
+                                <div class="fb-share-button" data-href="https://www.your-domain.com/your-page.html" data-layout="button_count">
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+                </header>
+                <div class="wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="banner-info text-center wow fadeIn delay-05s">
+                                <!--<h1 class="bnr-title"><span> სისტემები</span></h1>-->
+                                <h2 class="bnr-sub-title">ტენტ სისტემები</h2>
+                                <p class="bnr-para" style="font-size: 40px;">ჩვენი გამოცდილება ტენტ სისტემების
+                                    <br>სფეროში თქვენთვის გამოსავალია!</p>
+                                <div class="brn-btn">
+                                    <a href="https://www.facebook.com/TentebiTentebi" target="_blank" class="btn btn-more" style="color: white; border: 1px solid white">სოციალური  გვერდი</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/ HEADER-->
+        {% block content %}
+        {% endblock content %}
+        <!---->
+        <footer id="footer">
+            <div class="container">
+                <div class="row text-center">
+                    <p>&copy; Tent Systems Ltd. All Rights Reserved.</p>
+                    <div class="credits">
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!---->
+        </div>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+        <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <script src="{% static 'js/wow.js' %}"></script>
+        <script src="{% static 'js/jquery.bxslider.min.js' %}"></script>
+        <script src="{% static 'js/custom.js' %}"></script>
+        <script src="{% static 'contactform/contactform.js' %}"></script>
+
+</body>
+
+</html>

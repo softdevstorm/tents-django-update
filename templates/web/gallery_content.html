@@ -1,0 +1,223 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<title>ტენტ სისტემები: პერგოლა ნათურებით</title>
+	<link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+	<link href='{% static "gallery_content/css/light_gallery.css" %}' rel='stylesheet' type='text/css'>
+	<link href='{% static "gallery_content/css/style.css" %}' rel='stylesheet' type='text/css'>
+</head>
+<body>
+	<div class="container">
+        <meta id="logged_in_user" data-auth="{{request.user.is_superuser}}">
+		<h1 class="align-center">პერგოლოა ნათურებით</h1>
+        {% if request.user.is_superuser %}
+            <form method="POST">
+                {% csrf_token %}
+                <input type="file" class="add-new-image" name="pic" accept="image/*">
+                <input type="text" class="photo-name" name="photo_name" accept="image/*">
+                <input type="submit" value="Upload" class="submit-photo">
+            </form>
+        {% endif %}
+		<div class="gallery">
+            {% for photo in photos %}
+                <a href="{{ photo.photo.url }}" data-id="{{photo.id}}" class="img-fluid"><img class="img-fluid" src="{{ photo.photo.url }}" alt="ტენტ სისტემები: სურათი ვერ მოიძებნა" title="ტენტ სისტემები" /></a>
+            {% endfor %}
+
+			<div class="clear"></div>
+
+		</div>
+	</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript" src="{% static 'gallery_content/js/gallery_js.js' %}"></script>
+<script>
+	$(function(){
+	    var data = new FormData();
+	    var selectedPhotoId = null;
+		var $gallery = $('.gallery a');
+		if ($gallery.length > 0) {
+		    $gallery = $gallery.simpleLightbox();
+        }
+
+		$gallery.on('show.simplelightbox', function(){
+			console.log('Requested for showing');
+			selectedPhotoId = $(this).attr('data-id');
+		})
+		.on('shown.simplelightbox', function(){
+			// console.log('Shown');
+		})
+		.on('close.simplelightbox', function(){
+			// console.log('Requested for closing');
+		})
+		.on('closed.simplelightbox', function(){
+			// console.log('Closed');
+		})
+		.on('change.simplelightbox', function(){
+			// console.log('Requested for change');
+		})
+		.on('next.simplelightbox', function(){
+			// console.log('Requested for next');
+		})
+		.on('prev.simplelightbox', function(){
+			// console.log('Requested for prev');
+		})
+		.on('nextImageLoaded.simplelightbox', function(){
+			// console.log('Next image loaded');
+		})
+		.on('prevImageLoaded.simplelightbox', function(){
+			// console.log('Prev image loaded');
+		})
+		.on('changed.simplelightbox', function(){
+			// console.log('Image changed');
+		})
+		.on('nextDone.simplelightbox', function(){
+			// console.log('Image changed to next');
+		})
+		.on('prevDone.simplelightbox', function(){
+			// console.log('Image changed to prev');
+		})
+		.on('error.simplelightbox', function(e){
+			// console.log('No image found, go to the next/prev');
+			// console.log(e);
+		});
+
+		var ids = [];
+
+        for( var i = 0; i < $('.gallery a').length; i ++){
+            ids[i] = $('.gallery a').eq(i).attr('data-id');
+        }
+
+		$('.gallery a').click(function(){
+		    var loggedin = $('#logged_in_user').data().auth;
+		    if (loggedin == "True") {
+                $('.sl-image').append('<form method="post">{% csrf_token %}' +
+                    '<input type="file" class="upload-image" name="pic" accept="image/*" style="display: none;">' +
+                    '</form>');
+                $('.sl-image').append('<button class="change-photo">Change</button>');
+                $('.sl-image').append('<button class="delete-photo">Delete</button>');
+            }
+
+            $('.change-photo').click(function() {
+                var image = null;
+                $('.upload-image').click();
+                $('.upload-image').change(function(e) {
+                    image = e.target.files[0];
+                    var currentphotoid = null;
+                    var viewId = parseInt($('.sl-current').text());
+                    if (viewId) {
+                        currentphotoid  = ids[viewId - 1];
+                    } else {
+                        currentphotoid = parseInt(selectedPhotoId);
+                    }
+
+                    data.append('image', image);
+                    data.append('photo_id', currentphotoid);
+
+                    var token = '{{csrf_token}}';
+
+                    $.ajax({
+                        headers: { "X-CSRFToken": token },
+                        url: '/change-photo',
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        data: data,
+                        type: 'POST',
+                        success: function(response) {
+                            console.log(response);
+                            if ( response == 'success' ) {
+                                location.reload();
+                            }
+                        },
+                        error: function(error) {
+                            console.log(error);
+                        }
+                    });
+                    console.log(data);
+                });
+            });
+
+            $('.delete-photo').click(function() {
+                var currentphotoid = null;
+                var viewId = parseInt($('.sl-current').text());
+                if (viewId) {
+                    currentphotoid  = ids[viewId - 1];
+                } else {
+                    currentphotoid = parseInt(selectedPhotoId);
+                }
+
+                var token = '{{csrf_token}}';
+
+                data.append('photo_id', currentphotoid);
+
+                $.ajax({
+                    headers: { "X-CSRFToken": token },
+                    url: '/delete-photo',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                        if ( response == 'success' ) {
+                            location.reload();
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            });
+
+        });
+
+		$('.add-new-image').change(function(e) {
+            var image = e.target.files[0];
+            data.append('image', image);
+            data.append('gallery_id', parseInt(window.location.href.split('/')[4]));
+        });
+
+        $('.submit-photo').click(function (e) {
+            var name = $('input[name="photo_name"]').val();
+            data.append('name', name);
+            if (data) {
+                var token = '{{csrf_token}}';
+                $.ajax({
+                    headers: { "X-CSRFToken": token },
+                    url: '/add-new-photo',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    type: 'POST',
+                    success: function(response) {
+                        console.log(response);
+                        if ( response == 'success' ) {
+                            location.reload(true);
+                        }
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
+        })
+
+	});
+
+</script>
+</body>
+    <footer id="footer">
+      <div class="container">
+        <div class="row text-center">
+          <p style="text-align: center;">&copy; Tent Systems Ltd. All Rights Reserved.</p>
+          <div class="credits">
+          </div>
+        </div>
+      </div>
+    </footer>
+</html>
