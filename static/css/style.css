@@ -856,3 +856,10 @@ Responsive media queries
     text-align: center;
   }
 }
+
+#mapouter {
+    position: relative;
+    overflow: hidden;
+    width: 550px;
+    height: 300px;
+  }
